@@ -1,14 +1,5 @@
 package br.gov.sp.cps.fatec.pdv.view;
 
-import br.gov.sp.cps.fatec.pdv.model.entity.Produto;
-
-import javax.swing.BorderFactory;
-import javax.swing.Box;
-import javax.swing.BoxLayout;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -17,18 +8,31 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import java.math.BigDecimal;
+
+import javax.swing.BorderFactory;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
+import br.gov.sp.cps.fatec.pdv.model.entity.Produto;
 
 /**
  * Visão (View) do Formulário de Cadastro e Edição de Produtos.
  * <p>
  * <b>Conceito Pedagógico (Padrão MVC - Separação da Camada View):</b>
  * <ul>
- *   <li>Esta classe é estritamente responsável pela apresentação gráfica e coleta de dados brutos
- *       digitados pelo usuário.</li>
- *   <li><b>Não contém:</b> Acesso a banco de dados (JPA/SQL), regras de negócio ou lógica transacional.</li>
- *   <li>Os botões e campos de entrada expõem seus ouvintes/ações diretamente ao {@code ProdutoController},
- *       preservando o Princípio de Inversão de Controle e Responsabilidade Única (SOLID).</li>
+ * <li>Esta classe é estritamente responsável pela apresentação gráfica e coleta
+ * de dados brutos
+ * digitados pelo usuário.</li>
+ * <li><b>Não contém:</b> Acesso a banco de dados (JPA/SQL), regras de negócio
+ * ou lógica transacional.</li>
+ * <li>Os botões e campos de entrada expõem seus ouvintes/ações diretamente ao
+ * {@code ProdutoController},
+ * preservando o Princípio de Inversão de Controle e Responsabilidade Única
+ * (SOLID).</li>
  * </ul>
  *
  * @author FATEC - Técnicas de Programação II
@@ -74,8 +78,7 @@ public class ProdutoFormView extends JPanel {
         JPanel painelCampos = new JPanel(new GridBagLayout());
         painelCampos.setBorder(BorderFactory.createCompoundBorder(
                 BorderFactory.createTitledBorder(" Dados do Produto "),
-                BorderFactory.createEmptyBorder(15, 15, 15, 15)
-        ));
+                BorderFactory.createEmptyBorder(15, 15, 15, 15)));
 
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(8, 8, 8, 8);
@@ -83,49 +86,69 @@ public class ProdutoFormView extends JPanel {
         gbc.anchor = GridBagConstraints.WEST;
 
         // Campo ID (Somente Leitura)
-        gbc.gridx = 0; gbc.gridy = 0; gbc.weightx = 0.0;
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.weightx = 0.0;
         painelCampos.add(new JLabel("ID (Automático):"), gbc);
         txtId = new JTextField();
         txtId.setEditable(false);
         txtId.setEnabled(false);
         txtId.setPreferredSize(new Dimension(150, 30));
-        gbc.gridx = 1; gbc.gridy = 0; gbc.weightx = 1.0;
+        gbc.gridx = 1;
+        gbc.gridy = 0;
+        gbc.weightx = 1.0;
         painelCampos.add(txtId, gbc);
 
         // Campo Código de Barras
-        gbc.gridx = 0; gbc.gridy = 1; gbc.weightx = 0.0;
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        gbc.weightx = 0.0;
         painelCampos.add(new JLabel("Código de Barras (*):"), gbc);
         txtCodigoBarras = new JTextField();
         txtCodigoBarras.setPreferredSize(new Dimension(300, 30));
         txtCodigoBarras.setToolTipText("Exemplo: 7891234567890 (Identificador único de barras)");
-        gbc.gridx = 1; gbc.gridy = 1; gbc.weightx = 1.0;
+        gbc.gridx = 1;
+        gbc.gridy = 1;
+        gbc.weightx = 1.0;
         painelCampos.add(txtCodigoBarras, gbc);
 
         // Campo Nome
-        gbc.gridx = 0; gbc.gridy = 2; gbc.weightx = 0.0;
+        gbc.gridx = 0;
+        gbc.gridy = 2;
+        gbc.weightx = 0.0;
         painelCampos.add(new JLabel("Nome do Produto (*):"), gbc);
         txtNome = new JTextField();
         txtNome.setPreferredSize(new Dimension(300, 30));
         txtNome.setToolTipText("Nome descritivo do produto");
-        gbc.gridx = 1; gbc.gridy = 2; gbc.weightx = 1.0;
+        gbc.gridx = 1;
+        gbc.gridy = 2;
+        gbc.weightx = 1.0;
         painelCampos.add(txtNome, gbc);
 
         // Campo Preço
-        gbc.gridx = 0; gbc.gridy = 3; gbc.weightx = 0.0;
+        gbc.gridx = 0;
+        gbc.gridy = 3;
+        gbc.weightx = 0.0;
         painelCampos.add(new JLabel("Preço Unitário R$ (*):"), gbc);
         txtPreco = new JTextField();
         txtPreco.setPreferredSize(new Dimension(150, 30));
         txtPreco.setToolTipText("Exemplo: 19.99 (Utilize ponto ou vírgula)");
-        gbc.gridx = 1; gbc.gridy = 3; gbc.weightx = 1.0;
+        gbc.gridx = 1;
+        gbc.gridy = 3;
+        gbc.weightx = 1.0;
         painelCampos.add(txtPreco, gbc);
 
         // Campo Quantidade em Estoque
-        gbc.gridx = 0; gbc.gridy = 4; gbc.weightx = 0.0;
+        gbc.gridx = 0;
+        gbc.gridy = 4;
+        gbc.weightx = 0.0;
         painelCampos.add(new JLabel("Quantidade Estoque (*):"), gbc);
         txtQuantidadeEstoque = new JTextField();
         txtQuantidadeEstoque.setPreferredSize(new Dimension(150, 30));
         txtQuantidadeEstoque.setToolTipText("Exemplo: 10 (Número inteiro positivo ou zero)");
-        gbc.gridx = 1; gbc.gridy = 4; gbc.weightx = 1.0;
+        gbc.gridx = 1;
+        gbc.gridy = 4;
+        gbc.weightx = 1.0;
         painelCampos.add(txtQuantidadeEstoque, gbc);
 
         // Painel envelopador para manter o formulário no topo
@@ -184,7 +207,8 @@ public class ProdutoFormView extends JPanel {
         this.txtCodigoBarras.setText(produto.getCodigoBarras() != null ? produto.getCodigoBarras() : "");
         this.txtNome.setText(produto.getNome() != null ? produto.getNome() : "");
         this.txtPreco.setText(produto.getPreco() != null ? produto.getPreco().toPlainString() : "");
-        this.txtQuantidadeEstoque.setText(produto.getQuantidadeEstoque() != null ? String.valueOf(produto.getQuantidadeEstoque()) : "0");
+        this.txtQuantidadeEstoque
+                .setText(produto.getQuantidadeEstoque() != null ? String.valueOf(produto.getQuantidadeEstoque()) : "0");
     }
 
     /**

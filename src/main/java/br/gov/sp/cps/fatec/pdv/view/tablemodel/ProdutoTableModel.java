@@ -15,13 +15,18 @@ import java.util.Locale;
  * <p>
  * <b>Conceito Pedagógico (Padrão MVC no Swing / Model-Delegate):</b>
  * <ul>
- *   <li>O Swing adota uma variação do MVC onde o componente visual ({@code JTable})
- *       desacopla totalmente a renderização dos dados brutos através da abstração {@link javax.swing.table.TableModel}.</li>
- *   <li>Ao estender {@link AbstractTableModel}, implementamos os métodos fundamentais
- *       {@code getRowCount()}, {@code getColumnCount()} e {@code getValueAt()}.</li>
- *   <li>Notificação Reativa: Quando a lista interna de produtos é atualizada, invocamos
- *       {@code fireTableDataChanged()}, notificando a JTable para que ela repinte as linhas
- *       de forma atômica e eficiente na Event Dispatch Thread (EDT).</li>
+ * <li>O Swing adota uma variação do MVC onde o componente visual
+ * ({@code JTable})
+ * desacopla totalmente a renderização dos dados brutos através da abstração
+ * {@link javax.swing.table.TableModel}.</li>
+ * <li>Ao estender {@link AbstractTableModel}, implementamos os métodos
+ * fundamentais
+ * {@code getRowCount()}, {@code getColumnCount()} e {@code getValueAt()}.</li>
+ * <li>Notificação Reativa: Quando a lista interna de produtos é atualizada,
+ * invocamos
+ * {@code fireTableDataChanged()}, notificando a JTable para que ela repinte as
+ * linhas
+ * de forma atômica e eficiente na Event Dispatch Thread (EDT).</li>
  * </ul>
  *
  * @author FATEC - Técnicas de Programação II
@@ -36,7 +41,7 @@ public class ProdutoTableModel extends AbstractTableModel {
             "Qtd. Estoque"
     };
 
-    private static final NumberFormat MOEDA_FORMATTER = NumberFormat.getCurrencyInstance(new Locale("pt", "BR"));
+    private static final NumberFormat MOEDA_FORMATTER = NumberFormat.getCurrencyInstance(Locale.forLanguageTag("pt-BR"));
 
     private List<Produto> produtos;
 
@@ -67,7 +72,8 @@ public class ProdutoTableModel extends AbstractTableModel {
     }
 
     /**
-     * Retorna a entidade {@link Produto} correspondente à linha selecionada na tabela.
+     * Retorna a entidade {@link Produto} correspondente à linha selecionada na
+     * tabela.
      *
      * @param rowIndex Índice da linha na JTable.
      * @return {@link Produto} associado, ou {@code null} se o índice for inválido.
@@ -106,7 +112,8 @@ public class ProdutoTableModel extends AbstractTableModel {
 
     @Override
     public boolean isCellEditable(int rowIndex, int columnIndex) {
-        // Células da tabela são somente leitura; a edição ocorre via formulário dedicado (Clean View)
+        // Células da tabela são somente leitura; a edição ocorre via formulário
+        // dedicado (Clean View)
         return false;
     }
 
