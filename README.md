@@ -256,13 +256,16 @@ No terminal (PowerShell, Prompt de Comando ou Bash), na raiz do projeto:
 
 #### No Windows (PowerShell / CMD):
 ```powershell
-# Executar a aplicação diretamente pelo Maven:
-.\mvnw.cmd compile exec:java -Dexec.mainClass="br.gov.sp.cps.fatec.pdv.Main"
+# Executar a aplicação diretamente pelo Maven (classe principal pré-configurada no pom.xml):
+.\mvnw.cmd compile exec:java
+
+# Ou passando o parâmetro explicitamente (atenção às aspas no PowerShell):
+.\mvnw.cmd compile exec:java "-Dexec.mainClass=br.gov.sp.cps.fatec.pdv.Main"
 ```
 
 #### No Linux / macOS:
 ```bash
-./mvnw compile exec:java -Dexec.mainClass="br.gov.sp.cps.fatec.pdv.Main"
+./mvnw compile exec:java
 ```
 
 ---
