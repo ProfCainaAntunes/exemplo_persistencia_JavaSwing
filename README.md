@@ -78,37 +78,37 @@ graph TD
 O diagrama a seguir detalha o ciclo de vida completo do cadastro de um produto, desde a interação do usuário na interface gráfica até a persistência no banco e a atualização reativa da tabela:
 
 ```mermaid
-sequenceDiagram
-    autonumber
-    actor Usuario as Usuário (Operador)
-    participant Form as ProdutoFormView
-    participant Ctrl as ProdutoController
-    participant Svc as ProdutoService
-    participant Repo as ProdutoRepositoryImpl
-    participant JPA as EntityManager / H2
-    participant List as ProdutoListView / TableModel
+    sequenceDiagram
+        autonumber
+        actor Usuario as Usuário (Operador)
+        participant Form as ProdutoFormView
+        participant Ctrl as ProdutoController
+        participant Svc as ProdutoService
+        participant Repo as ProdutoRepositoryImpl
+        participant JPA as EntityManager / H2
+        participant List as ProdutoListView / TableModel
 
-    Usuario->>Form: Clica em "Salvar Produto"
-    Form->>Ctrl: Dispara ActionListener (btnSalvar)
-    Ctrl->>Form: Coleta dados (código de barras, nome, preço, estoque)
-    Ctrl->>Ctrl: Valida conversão numérica (BigDecimal / Integer)
-    
-    Ctrl->>Svc: salvar(novoProduto)
-    Note over Svc: Valida Regras de Negócio:<br/>- Campos não vazios<br/>- Preço positivo (&gt; 0)<br/>- Estoque não negativo (&gt;= 0)<br/>- Unicidade do código de barras
-    
-    Svc->>Repo: salvar(produto)
-    Repo->>JPA: em.getTransaction().begin()
-    Repo->>JPA: em.persist(produto)
-    Repo->>JPA: em.getTransaction().commit()
-    JPA-->>Repo: Produto com ID gerado (Identity)
-    Repo-->>Svc: Retorna produto persistido
-    
-    Note over Svc: Padrão Observer Disparado:<br/>Thread-Safe via SwingUtilities.invokeLater
-    Svc->>Ctrl: onProdutosChanged(listaAtualizada)
-    Ctrl->>List: atualizarTabela(listaAtualizada)
-    List-->>Usuario: JTable repintada e atualizada na tela!
-    Ctrl->>Form: Exibe JOptionPane ("Produto cadastrado com sucesso!")
-    Ctrl->>Form: Alterna CardLayout para tela de Listagem
+        Usuario->>Form: Clica em "Salvar Produto"
+        Form->>Ctrl: Dispara ActionListener (btnSalvar)
+        Ctrl->>Form: Coleta dados (código de barras, nome, preço, estoque)
+        Ctrl->>Ctrl: Valida conversão numérica (BigDecimal / Integer)
+        
+        Ctrl->>Svc: salvar(novoProduto)
+        Note over Svc: Valida Regras de Negócio:<br/>- Campos não vazios<br/>- Preço positivo (&gt; 0)<br/>- Estoque não negativo (&gt;= 0)<br/>- Unicidade do código de barras
+        
+        Svc->>Repo: salvar(produto)
+        Repo->>JPA: em.getTransaction().begin()
+        Repo->>JPA: em.persist(produto)
+        Repo->>JPA: em.getTransaction().commit()
+        JPA-->>Repo: Produto com ID gerado (Identity)
+        Repo-->>Svc: Retorna produto persistido
+        
+        Note over Svc: Padrão Observer Disparado:<br/>Thread-Safe via SwingUtilities.invokeLater
+        Svc->>Ctrl: onProdutosChanged(listaAtualizada)
+        Ctrl->>List: atualizarTabela(listaAtualizada)
+        List-->>Usuario: JTable repintada e atualizada na tela!
+        Ctrl->>Form: Exibe JOptionPane ("Produto cadastrado com sucesso!")
+        Ctrl->>Form: Alterna CardLayout para tela de Listagem
 ```
 
 ---
@@ -256,16 +256,13 @@ No terminal (PowerShell, Prompt de Comando ou Bash), na raiz do projeto:
 
 #### No Windows (PowerShell / CMD):
 ```powershell
-# Executar a aplicação diretamente pelo Maven (classe principal pré-configurada no pom.xml):
-.\mvnw.cmd compile exec:java
-
-# Ou passando o parâmetro explicitamente (atenção às aspas no PowerShell):
-.\mvnw.cmd compile exec:java "-Dexec.mainClass=br.gov.sp.cps.fatec.pdv.Main"
+# Executar a aplicação diretamente pelo Maven:
+.\mvnw.cmd compile exec:java -Dexec.mainClass="br.gov.sp.cps.fatec.pdv.Main"
 ```
 
 #### No Linux / macOS:
 ```bash
-./mvnw compile exec:java
+./mvnw compile exec:java -Dexec.mainClass="br.gov.sp.cps.fatec.pdv.Main"
 ```
 
 ---
