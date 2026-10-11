@@ -119,6 +119,16 @@
                     </execution>
                 </executions>
             </plugin>
+
+            <!-- Exec Maven Plugin (Execução via 'mvn exec:java') -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>3.2.0</version>
+                <configuration>
+                    <mainClass>br.gov.sp.cps.fatec.pdv.Main</mainClass>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 </project>
