@@ -9,15 +9,20 @@ import jakarta.persistence.Persistence;
  * <p>
  * <b>Conceito Pedagógico (Padrão Singleton / Factory):</b>
  * <ul>
- *   <li>{@link EntityManagerFactory}: Representa a fábrica de conexões e metadados ORM.
- *       É um objeto de custo computacional pesado (heavyweight), inicializado apenas uma vez
- *       durante o ciclo de vida da aplicação (Thread-Safe).</li>
- *   <li>{@link EntityManager}: Representa a unidade de trabalho (Unit of Work) e contexto
- *       de persistência. É um objeto leve (lightweight), porém <b>NÃO</b> é Thread-Safe. Cada
- *       operação ou transação deve obter seu próprio {@code EntityManager} e fechá-lo após o uso.</li>
+ * <li>{@link EntityManagerFactory}: Representa a fábrica de conexões e
+ * metadados ORM.
+ * É um objeto de custo computacional pesado (heavyweight), inicializado apenas
+ * uma vez
+ * durante o ciclo de vida da aplicação (Thread-Safe).</li>
+ * <li>{@link EntityManager}: Representa a unidade de trabalho (Unit of Work) e
+ * contexto
+ * de persistência. É um objeto leve (lightweight), porém <b>NÃO</b> é
+ * Thread-Safe. Cada
+ * operação ou transação deve obter seu próprio {@code EntityManager} e fechá-lo
+ * após o uso.</li>
  * </ul>
  * 
- * @author FATEC - Técnicas de Programação II
+ * @author Cainã Antunes Silva
  */
 public final class JPAUtil {
 
@@ -43,9 +48,11 @@ public final class JPAUtil {
     }
 
     /**
-     * Inicializa a fábrica com uma unidade de persistência customizada (ex.: para testes integrados).
+     * Inicializa a fábrica com uma unidade de persistência customizada (ex.: para
+     * testes integrados).
      *
-     * @param persistenceUnitName Nome da unidade de persistência configurada no persistence.xml.
+     * @param persistenceUnitName Nome da unidade de persistência configurada no
+     *                            persistence.xml.
      */
     public static synchronized void init(String persistenceUnitName) {
         close();
@@ -63,7 +70,8 @@ public final class JPAUtil {
 
     /**
      * Encerra a fábrica de conexões e libera todos os recursos de banco de dados.
-     * Deve ser invocado no encerramento da aplicação Swing (WindowListener/ShutdownHook).
+     * Deve ser invocado no encerramento da aplicação Swing
+     * (WindowListener/ShutdownHook).
      */
     public static synchronized void close() {
         if (emf != null && emf.isOpen()) {

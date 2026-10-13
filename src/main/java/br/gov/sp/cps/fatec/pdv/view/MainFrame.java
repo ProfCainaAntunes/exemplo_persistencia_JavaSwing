@@ -8,16 +8,21 @@ import java.awt.Dimension;
 /**
  * Janela Principal da Aplicação Swing ({@link JFrame}).
  * <p>
- * <b>Conceito Pedagógico (Padrão CardLayout & Interface de Janela Única - SDI):</b>
+ * <b>Conceito Pedagógico (Padrão CardLayout & Interface de Janela Única -
+ * SDI):</b>
  * <ul>
- *   <li>Em vez de abrir múltiplas janelas flutuantes desordenadas (MDI ou múltiplos JFrames),
- *       o {@link CardLayout} gerencia diferentes "páginas" ou painéis de visão em uma única área
- *       de exibição como se fossem cartas empilhadas.</li>
- *   <li>A orquestração e a decisão de qual tela deve ser exibida é controlada pelo
- *       {@code ProdutoController}, garantindo a independência das visões entre si.</li>
+ * <li>Em vez de abrir múltiplas janelas flutuantes desordenadas (MDI ou
+ * múltiplos JFrames),
+ * o {@link CardLayout} gerencia diferentes "páginas" ou painéis de visão em uma
+ * única área
+ * de exibição como se fossem cartas empilhadas.</li>
+ * <li>A orquestração e a decisão de qual tela deve ser exibida é controlada
+ * pelo
+ * {@code ProdutoController}, garantindo a independência das visões entre
+ * si.</li>
  * </ul>
  *
- * @author FATEC - Técnicas de Programação II
+ * @author Cainã Antunes Silva
  */
 public class MainFrame extends JFrame {
 

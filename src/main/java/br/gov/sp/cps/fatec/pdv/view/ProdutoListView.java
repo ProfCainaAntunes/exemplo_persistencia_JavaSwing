@@ -24,14 +24,17 @@ import java.util.List;
  * <p>
  * <b>Conceito Pedagógico (Padrão MVC & Componentes Reativos do Swing):</b>
  * <ul>
- *   <li>Apresenta a listagem atualizada de produtos persistidos no banco de dados.</li>
- *   <li>O desacoplamento é garantido através do {@link ProdutoTableModel}: a tabela é atualizada
- *       automaticamente sempre que novas listas são fornecidas pelo Controller.</li>
- *   <li>Expõe botões de comando ("Novo Produto", "Editar", "Excluir") e método para identificar
- *       o registro atualmente selecionado pelo usuário.</li>
+ * <li>Apresenta a listagem atualizada de produtos persistidos no banco de
+ * dados.</li>
+ * <li>O desacoplamento é garantido através do {@link ProdutoTableModel}: a
+ * tabela é atualizada
+ * automaticamente sempre que novas listas são fornecidas pelo Controller.</li>
+ * <li>Expõe botões de comando ("Novo Produto", "Editar", "Excluir") e método
+ * para identificar
+ * o registro atualmente selecionado pelo usuário.</li>
  * </ul>
  *
- * @author FATEC - Técnicas de Programação II
+ * @author Cainã Antunes Silva
  */
 public class ProdutoListView extends JPanel {
 
@@ -75,11 +78,11 @@ public class ProdutoListView extends JPanel {
         tabelaProdutos.getTableHeader().setReorderingAllowed(false);
 
         // Ajuste didático de largura das colunas
-        tabelaProdutos.getColumnModel().getColumn(0).setPreferredWidth(60);   // ID
-        tabelaProdutos.getColumnModel().getColumn(1).setPreferredWidth(140);  // Código de Barras
-        tabelaProdutos.getColumnModel().getColumn(2).setPreferredWidth(280);  // Nome
-        tabelaProdutos.getColumnModel().getColumn(3).setPreferredWidth(120);  // Preço
-        tabelaProdutos.getColumnModel().getColumn(4).setPreferredWidth(100);  // Quantidade
+        tabelaProdutos.getColumnModel().getColumn(0).setPreferredWidth(60); // ID
+        tabelaProdutos.getColumnModel().getColumn(1).setPreferredWidth(140); // Código de Barras
+        tabelaProdutos.getColumnModel().getColumn(2).setPreferredWidth(280); // Nome
+        tabelaProdutos.getColumnModel().getColumn(3).setPreferredWidth(120); // Preço
+        tabelaProdutos.getColumnModel().getColumn(4).setPreferredWidth(100); // Quantidade
 
         JScrollPane scrollPane = new JScrollPane(tabelaProdutos);
         scrollPane.setBorder(BorderFactory.createTitledBorder(" Produtos Cadastrados "));
@@ -119,7 +122,8 @@ public class ProdutoListView extends JPanel {
     }
 
     /**
-     * Atualiza a tabela com a lista atual de produtos e renova o contador do rodapé.
+     * Atualiza a tabela com a lista atual de produtos e renova o contador do
+     * rodapé.
      *
      * @param produtos Coleção de produtos a exibir.
      */
@@ -132,7 +136,8 @@ public class ProdutoListView extends JPanel {
     /**
      * Retorna a entidade {@link Produto} selecionada na linha ativa da tabela.
      *
-     * @return {@link Produto} selecionado ou {@code null} se nenhuma linha estiver selecionada.
+     * @return {@link Produto} selecionado ou {@code null} se nenhuma linha estiver
+     *         selecionada.
      */
     public Produto getProdutoSelecionado() {
         int selectedRow = tabelaProdutos.getSelectedRow();

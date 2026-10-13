@@ -29,7 +29,7 @@ import java.util.Locale;
  * de forma atômica e eficiente na Event Dispatch Thread (EDT).</li>
  * </ul>
  *
- * @author FATEC - Técnicas de Programação II
+ * @author Cainã Antunes Silva
  */
 public class ProdutoTableModel extends AbstractTableModel {
 
@@ -41,7 +41,8 @@ public class ProdutoTableModel extends AbstractTableModel {
             "Qtd. Estoque"
     };
 
-    private static final NumberFormat MOEDA_FORMATTER = NumberFormat.getCurrencyInstance(Locale.forLanguageTag("pt-BR"));
+    private static final NumberFormat MOEDA_FORMATTER = NumberFormat
+            .getCurrencyInstance(Locale.forLanguageTag("pt-BR"));
 
     private List<Produto> produtos;
 

@@ -14,34 +14,34 @@ import java.math.BigDecimal;
 import java.util.Objects;
 
 /**
- * Entidade de Domínio representando um Produto no subsistema de Ponto de Venda (PDV).
+ * Entidade de Domínio representando um Produto no subsistema de Ponto de Venda
+ * (PDV).
  * <p>
  * <b>Conceito Pedagógico (Mapeamento Objeto-Relacional - ORM):</b>
- * A JPA resolve o <i>Impedance Mismatch</i> (descompasso de impedância) entre o paradigma
- * orientado a objetos (classes, herança, encapsulamento) e o modelo relacional (tabelas, chaves
+ * A JPA resolve o <i>Impedance Mismatch</i> (descompasso de impedância) entre o
+ * paradigma
+ * orientado a objetos (classes, herança, encapsulamento) e o modelo relacional
+ * (tabelas, chaves
  * primárias, chaves estrangeiras).
  * <ul>
- *   <li>{@link Entity}: Informa ao provedor JPA (Hibernate) que instâncias desta classe devem
- *       ser mapeadas para uma tabela relacional.</li>
- *   <li>{@link Table}: Define o nome e as restrições da tabela física.</li>
- *   <li>{@link Id} e {@link GeneratedValue}: Define a chave primária com estratégia autoincremento
- *       (IDENTITY), delegando ao mecanismo de sequence/identity do SGBD (H2).</li>
- *   <li>{@link Column}: Mapeia propriedades para colunas com restrições DDL (not null, unique, precisão).</li>
+ * <li>{@link Entity}: Informa ao provedor JPA (Hibernate) que instâncias desta
+ * classe devem
+ * ser mapeadas para uma tabela relacional.</li>
+ * <li>{@link Table}: Define o nome e as restrições da tabela física.</li>
+ * <li>{@link Id} e {@link GeneratedValue}: Define a chave primária com
+ * estratégia autoincremento
+ * (IDENTITY), delegando ao mecanismo de sequence/identity do SGBD (H2).</li>
+ * <li>{@link Column}: Mapeia propriedades para colunas com restrições DDL (not
+ * null, unique, precisão).</li>
  * </ul>
  *
- * @author FATEC - Técnicas de Programação II
+ * @author Cainã Antunes Silva
  */
 @Entity
 @Table(name = "produtos")
 @NamedQueries({
-    @NamedQuery(
-        name = "Produto.listarTodos",
-        query = "SELECT p FROM Produto p ORDER BY p.nome ASC"
-    ),
-    @NamedQuery(
-        name = "Produto.buscarPorCodigoBarras",
-        query = "SELECT p FROM Produto p WHERE p.codigoBarras = :codigoBarras"
-    )
+        @NamedQuery(name = "Produto.listarTodos", query = "SELECT p FROM Produto p ORDER BY p.nome ASC"),
+        @NamedQuery(name = "Produto.buscarPorCodigoBarras", query = "SELECT p FROM Produto p WHERE p.codigoBarras = :codigoBarras")
 })
 public class Produto implements Serializable {
 
@@ -72,11 +72,12 @@ public class Produto implements Serializable {
     }
 
     /**
-     * Construtor de conveniência para instanciação de novos produtos antes da persistência (sem id).
+     * Construtor de conveniência para instanciação de novos produtos antes da
+     * persistência (sem id).
      *
-     * @param codigoBarras Código de barras único do produto.
-     * @param nome Nome descritivo do produto.
-     * @param preco Preço unitário de venda (deve ser positivo).
+     * @param codigoBarras      Código de barras único do produto.
+     * @param nome              Nome descritivo do produto.
+     * @param preco             Preço unitário de venda (deve ser positivo).
      * @param quantidadeEstoque Quantidade disponível em estoque (não-negativo).
      */
     public Produto(String codigoBarras, String nome, BigDecimal preco, Integer quantidadeEstoque) {
@@ -89,10 +90,10 @@ public class Produto implements Serializable {
     /**
      * Construtor completo incluindo o identificador.
      *
-     * @param id Identificador único gerado pelo banco de dados.
-     * @param codigoBarras Código de barras único do produto.
-     * @param nome Nome descritivo do produto.
-     * @param preco Preço unitário de venda.
+     * @param id                Identificador único gerado pelo banco de dados.
+     * @param codigoBarras      Código de barras único do produto.
+     * @param nome              Nome descritivo do produto.
+     * @param preco             Preço unitário de venda.
      * @param quantidadeEstoque Quantidade em estoque.
      */
     public Produto(Long id, String codigoBarras, String nome, BigDecimal preco, Integer quantidadeEstoque) {
@@ -150,10 +151,13 @@ public class Produto implements Serializable {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
         Produto produto = (Produto) o;
-        // Se ambos têm id, compara por id; caso contrário, compara pela chave natural (codigoBarras)
+        // Se ambos têm id, compara por id; caso contrário, compara pela chave natural
+        // (codigoBarras)
         if (this.id != null && produto.id != null) {
             return Objects.equals(this.id, produto.id);
         }

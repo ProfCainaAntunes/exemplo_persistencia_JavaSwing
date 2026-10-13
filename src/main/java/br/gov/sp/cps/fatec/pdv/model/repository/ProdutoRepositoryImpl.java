@@ -13,26 +13,34 @@ import java.util.Objects;
 import java.util.Optional;
 
 /**
- * Implementação do {@link ProdutoRepository} utilizando a JPA (Java Persistence API) com Hibernate.
+ * Implementação do {@link ProdutoRepository} utilizando a JPA (Java Persistence
+ * API) com Hibernate.
  * <p>
- * <b>Conceito Pedagógico (Gerenciamento Explícito de Transações e Recursos):</b>
+ * <b>Conceito Pedagógico (Gerenciamento Explícito de Transações e
+ * Recursos):</b>
  * <ul>
- *   <li>Cada operação que modifica dados (DML - Insert, Update, Delete) requer a demarcação de uma transação
- *       atômica (ACID): {@code em.getTransaction().begin()}, {@code commit()} e em caso de falha {@code rollback()}.</li>
- *   <li>O fechamento do {@link EntityManager} em bloco {@code finally} é crucial para evitar vazamento
- *       de conexões com o banco de dados (Connection Leak).</li>
- *   <li>Injeção de Dependências (IoC): A classe permite receber um {@link EntityManagerFactory}
- *       customizado no construtor, possibilitando testes com banco em memória sem alterar a lógica.</li>
+ * <li>Cada operação que modifica dados (DML - Insert, Update, Delete) requer a
+ * demarcação de uma transação
+ * atômica (ACID): {@code em.getTransaction().begin()}, {@code commit()} e em
+ * caso de falha {@code rollback()}.</li>
+ * <li>O fechamento do {@link EntityManager} em bloco {@code finally} é crucial
+ * para evitar vazamento
+ * de conexões com o banco de dados (Connection Leak).</li>
+ * <li>Injeção de Dependências (IoC): A classe permite receber um
+ * {@link EntityManagerFactory}
+ * customizado no construtor, possibilitando testes com banco em memória sem
+ * alterar a lógica.</li>
  * </ul>
  *
- * @author FATEC - Técnicas de Programação II
+ * @author Cainã Antunes Silva
  */
 public class ProdutoRepositoryImpl implements ProdutoRepository {
 
     private final EntityManagerFactory emf;
 
     /**
-     * Construtor padrão que obtém o {@link EntityManagerFactory} singleton via {@link JPAUtil}.
+     * Construtor padrão que obtém o {@link EntityManagerFactory} singleton via
+     * {@link JPAUtil}.
      */
     public ProdutoRepositoryImpl() {
         this(JPAUtil.getEntityManagerFactory());
@@ -41,7 +49,8 @@ public class ProdutoRepositoryImpl implements ProdutoRepository {
     /**
      * Construtor com Injeção de Dependência (IoC) da fábrica de conexões.
      *
-     * @param emf Fábrica {@link EntityManagerFactory} a ser utilizada para criar conexões.
+     * @param emf Fábrica {@link EntityManagerFactory} a ser utilizada para criar
+     *            conexões.
      */
     public ProdutoRepositoryImpl(EntityManagerFactory emf) {
         this.emf = Objects.requireNonNull(emf, "EntityManagerFactory não pode ser nulo.");

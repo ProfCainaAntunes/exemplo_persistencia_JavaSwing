@@ -35,7 +35,7 @@ import br.gov.sp.cps.fatec.pdv.model.entity.Produto;
  * (SOLID).</li>
  * </ul>
  *
- * @author FATEC - Técnicas de Programação II
+ * @author Cainã Antunes Silva
  */
 public class ProdutoFormView extends JPanel {
 

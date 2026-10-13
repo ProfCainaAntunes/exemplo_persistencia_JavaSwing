@@ -17,18 +17,24 @@ import java.util.Optional;
  * <p>
  * <b>Conceito Pedagógico (Regras de Negócio, IoC e Thread-Safety):</b>
  * <ul>
- *   <li><b>Validação de Domínio:</b> Aplica validações estritas exigidas pelas regras de negócio
- *       (código de barras único e preenchido, nome obrigatório, preço estritamente positivo,
- *       estoque não-negativo).</li>
- *   <li><b>Inversão de Dependência (DIP):</b> Depende exclusivamente da abstração {@link ProdutoRepository}.</li>
- *   <li><b>Padrão Observer (Subject):</b> Mantém a lista de ouvintes registrados e dispara
- *       notificações reativas após mutações de dados bem-sucedidas.</li>
- *   <li><b>Thread Safety com Swing (EDT):</b> Assegura que o método {@link ProdutoObserver#onProdutosChanged(List)}
- *       seja sempre despachado na <i>Event Dispatch Thread</i> do Swing via {@link SwingUtilities#invokeLater(Runnable)},
- *       evitando condições de corrida (Race Conditions) e travamentos de UI.</li>
+ * <li><b>Validação de Domínio:</b> Aplica validações estritas exigidas pelas
+ * regras de negócio
+ * (código de barras único e preenchido, nome obrigatório, preço estritamente
+ * positivo,
+ * estoque não-negativo).</li>
+ * <li><b>Inversão de Dependência (DIP):</b> Depende exclusivamente da abstração
+ * {@link ProdutoRepository}.</li>
+ * <li><b>Padrão Observer (Subject):</b> Mantém a lista de ouvintes registrados
+ * e dispara
+ * notificações reativas após mutações de dados bem-sucedidas.</li>
+ * <li><b>Thread Safety com Swing (EDT):</b> Assegura que o método
+ * {@link ProdutoObserver#onProdutosChanged(List)}
+ * seja sempre despachado na <i>Event Dispatch Thread</i> do Swing via
+ * {@link SwingUtilities#invokeLater(Runnable)},
+ * evitando condições de corrida (Race Conditions) e travamentos de UI.</li>
  * </ul>
  *
- * @author FATEC - Técnicas de Programação II
+ * @author Cainã Antunes Silva
  */
 public class ProdutoService {
 
@@ -70,7 +76,8 @@ public class ProdutoService {
     }
 
     /**
-     * Notifica todos os observadores cadastrados com a lista de produtos atualizada.
+     * Notifica todos os observadores cadastrados com a lista de produtos
+     * atualizada.
      * Garante o disparo seguro na Event Dispatch Thread (EDT) do Swing.
      */
     public void notificarObservadores() {
@@ -109,8 +116,7 @@ public class ProdutoService {
         Optional<Produto> existente = repository.buscarPorCodigoBarras(produto.getCodigoBarras());
         if (existente.isPresent()) {
             throw new IllegalArgumentException(
-                    "Já existe um produto cadastrado com o código de barras informado: " + produto.getCodigoBarras()
-            );
+                    "Já existe um produto cadastrado com o código de barras informado: " + produto.getCodigoBarras());
         }
 
         Produto salvo = repository.salvar(produto);
@@ -135,8 +141,8 @@ public class ProdutoService {
         if (existente.isPresent() && !existente.get().getId().equals(produto.getId())) {
             throw new IllegalArgumentException(
                     "O código de barras '" + produto.getCodigoBarras() +
-                    "' já pertence a outro produto cadastrado (#" + existente.get().getId() + " - " + existente.get().getNome() + ")."
-            );
+                            "' já pertence a outro produto cadastrado (#" + existente.get().getId() + " - "
+                            + existente.get().getNome() + ").");
         }
 
         Produto atualizado = repository.atualizar(produto);

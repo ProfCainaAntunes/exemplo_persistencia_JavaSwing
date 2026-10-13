@@ -42,7 +42,7 @@ import java.math.BigDecimal;
  * quando a janela for fechada pelo usuário.</li>
  * </ul>
  *
- * @author FATEC - Técnicas de Programação II
+ * @author Cainã Antunes Silva
  */
 public class Main {
 

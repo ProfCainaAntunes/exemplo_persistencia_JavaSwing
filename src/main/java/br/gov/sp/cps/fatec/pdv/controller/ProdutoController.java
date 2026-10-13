@@ -14,20 +14,28 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * Controlador Principal do Módulo de Gestão de Produtos (Padrão MVC & Mediator).
+ * Controlador Principal do Módulo de Gestão de Produtos (Padrão MVC &
+ * Mediator).
  * <p>
  * <b>Conceito Pedagógico (Padrão Controller & Inversão de Dependência):</b>
  * <ul>
- *   <li><b>Orquestrador Central:</b> O Controller captura as interações do usuário disparadas
- *       nas telas Swing (eventos de botões), valida e converte dados de entrada e aciona a camada de negócio.</li>
- *   <li><b>Isolamento Completo:</b> A View nunca se comunica diretamente com o Repositório ou banco de dados.</li>
- *   <li><b>Inversão de Dependência (IoC):</b> O Controller recebe suas dependências no construtor através
- *       de interfaces e classes de serviço, desacoplando a camada de controle da instanciação física.</li>
- *   <li><b>Integração com o Padrão Observer:</b> O Controller implementa {@link ProdutoObserver},
- *       sendo notificado de forma reativa a cada persistência para atualizar a JTable da tela.</li>
+ * <li><b>Orquestrador Central:</b> O Controller captura as interações do
+ * usuário disparadas
+ * nas telas Swing (eventos de botões), valida e converte dados de entrada e
+ * aciona a camada de negócio.</li>
+ * <li><b>Isolamento Completo:</b> A View nunca se comunica diretamente com o
+ * Repositório ou banco de dados.</li>
+ * <li><b>Inversão de Dependência (IoC):</b> O Controller recebe suas
+ * dependências no construtor através
+ * de interfaces e classes de serviço, desacoplando a camada de controle da
+ * instanciação física.</li>
+ * <li><b>Integração com o Padrão Observer:</b> O Controller implementa
+ * {@link ProdutoObserver},
+ * sendo notificado de forma reativa a cada persistência para atualizar a JTable
+ * da tela.</li>
  * </ul>
  *
- * @author FATEC - Técnicas de Programação II
+ * @author Cainã Antunes Silva
  */
 public class ProdutoController implements ProdutoObserver {
 
@@ -39,7 +47,7 @@ public class ProdutoController implements ProdutoObserver {
     /**
      * Construtor recebendo o Repositório diretamente (Inversão de Dependência).
      *
-     * @param mainFrame Janela principal da aplicação.
+     * @param mainFrame  Janela principal da aplicação.
      * @param repository Abstração do repositório de dados.
      */
     public ProdutoController(MainFrame mainFrame, ProdutoRepository repository) {
@@ -50,7 +58,7 @@ public class ProdutoController implements ProdutoObserver {
      * Construtor recebendo a camada de serviço.
      *
      * @param mainFrame Janela principal da aplicação.
-     * @param service Camada de serviços e regras de negócio.
+     * @param service   Camada de serviços e regras de negócio.
      */
     public ProdutoController(MainFrame mainFrame, ProdutoService service) {
         this.mainFrame = Objects.requireNonNull(mainFrame, "MainFrame não pode ser nulo.");
@@ -62,7 +70,8 @@ public class ProdutoController implements ProdutoObserver {
     }
 
     /**
-     * Inicializa o fluxo do controlador, conectando os observadores e carregando a listagem inicial.
+     * Inicializa o fluxo do controlador, conectando os observadores e carregando a
+     * listagem inicial.
      */
     public void inicializar() {
         this.service.addObserver(this);
@@ -71,7 +80,8 @@ public class ProdutoController implements ProdutoObserver {
     }
 
     /**
-     * Configura os ouvintes de eventos (Listeners) nos componentes visuais das telas.
+     * Configura os ouvintes de eventos (Listeners) nos componentes visuais das
+     * telas.
      */
     private void vincularEventos() {
         // --- Eventos da Tela de Listagem ---
@@ -114,8 +124,7 @@ public class ProdutoController implements ProdutoObserver {
                     mainFrame,
                     "Selecione um produto na tabela para editar.",
                     "Atenção - Seleção Necessária",
-                    JOptionPane.WARNING_MESSAGE
-            );
+                    JOptionPane.WARNING_MESSAGE);
             return;
         }
 
@@ -130,8 +139,7 @@ public class ProdutoController implements ProdutoObserver {
                     mainFrame,
                     "Selecione um produto na tabela para excluir.",
                     "Atenção - Seleção Necessária",
-                    JOptionPane.WARNING_MESSAGE
-            );
+                    JOptionPane.WARNING_MESSAGE);
             return;
         }
 
@@ -141,8 +149,7 @@ public class ProdutoController implements ProdutoObserver {
                         selecionado.getId(), selecionado.getNome(), selecionado.getCodigoBarras()),
                 "Confirmar Exclusão de Produto",
                 JOptionPane.YES_NO_OPTION,
-                JOptionPane.QUESTION_MESSAGE
-        );
+                JOptionPane.QUESTION_MESSAGE);
 
         if (confirmacao == JOptionPane.YES_OPTION) {
             try {
@@ -151,15 +158,13 @@ public class ProdutoController implements ProdutoObserver {
                         mainFrame,
                         "Produto excluído com sucesso!",
                         "Sucesso",
-                        JOptionPane.INFORMATION_MESSAGE
-                );
+                        JOptionPane.INFORMATION_MESSAGE);
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(
                         mainFrame,
                         "Erro ao excluir produto: " + ex.getMessage(),
                         "Erro de Persistência",
-                        JOptionPane.ERROR_MESSAGE
-                );
+                        JOptionPane.ERROR_MESSAGE);
             }
         }
     }
@@ -183,7 +188,8 @@ public class ProdutoController implements ProdutoObserver {
             try {
                 quantidadeEstoque = Integer.parseInt(estoqueStr);
             } catch (NumberFormatException ex) {
-                throw new IllegalArgumentException("Quantidade em estoque inválida. Informe um número inteiro (ex.: 10).");
+                throw new IllegalArgumentException(
+                        "Quantidade em estoque inválida. Informe um número inteiro (ex.: 10).");
             }
 
             Long id = formView.getProdutoIdAtual();
@@ -196,8 +202,7 @@ public class ProdutoController implements ProdutoObserver {
                         mainFrame,
                         "Produto cadastrado com sucesso!",
                         "Sucesso",
-                        JOptionPane.INFORMATION_MESSAGE
-                );
+                        JOptionPane.INFORMATION_MESSAGE);
             } else {
                 // Modo Atualização (Edição)
                 Produto produtoAtualizado = new Produto(id, codigoBarras, nome, preco, quantidadeEstoque);
@@ -206,8 +211,7 @@ public class ProdutoController implements ProdutoObserver {
                         mainFrame,
                         "Produto atualizado com sucesso!",
                         "Sucesso",
-                        JOptionPane.INFORMATION_MESSAGE
-                );
+                        JOptionPane.INFORMATION_MESSAGE);
             }
 
             // Retorna à tela de listagem
@@ -219,16 +223,14 @@ public class ProdutoController implements ProdutoObserver {
                     mainFrame,
                     ex.getMessage(),
                     "Validação de Dados",
-                    JOptionPane.WARNING_MESSAGE
-            );
+                    JOptionPane.WARNING_MESSAGE);
         } catch (Exception ex) {
             // Erros inesperados de infraestrutura ou banco
             JOptionPane.showMessageDialog(
                     mainFrame,
                     "Falha na operação de persistência: " + ex.getMessage(),
                     "Erro no Banco de Dados",
-                    JOptionPane.ERROR_MESSAGE
-            );
+                    JOptionPane.ERROR_MESSAGE);
         }
     }
 
