@@ -123,15 +123,16 @@ sequenceDiagram
     autonumber
     actor Usuario as Operador
     participant Form as ProdutoFormView
+    participant List as ProdutoListView (TableModel)
     participant Ctrl as ProdutoController
     participant Svc as ProdutoService
     participant Repo as ProdutoRepositoryImpl
     participant JPA as EntityManager (H2)
-    participant List as ProdutoListView (TableModel)
 
     Usuario->>Form: Clica em 'Salvar Produto'
     Form->>Ctrl: Dispara ActionListener (btnSalvar)
     Ctrl->>Form: Coleta dados (código de barras, nome, preço, estoque)
+    Form-->>Ctrl: Devolve os dados solicitados
     Ctrl->>Ctrl: Valida conversão numérica (BigDecimal e Integer)
     
     Ctrl->>Svc: salvar(novoProduto)
@@ -147,9 +148,9 @@ sequenceDiagram
     Note over Svc: Padrão Observer Disparado<br/>(Thread-Safe via SwingUtilities.invokeLater)
     Svc->>Ctrl: onProdutosChanged(listaAtualizada)
     Ctrl->>List: atualizarTabela(listaAtualizada)
-    List-->>Usuario: JTable repintada e atualizada na tela
     Ctrl->>Form: Exibe mensagem de confirmação
-    Ctrl->>Form: Alterna CardLayout para tela de Listagem
+    Ctrl->>List: Alterna CardLayout para tela de Listagem
+    List-->>Usuario: JTable repintada e atualizada na tela
 ```
 
 ---
